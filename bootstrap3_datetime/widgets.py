@@ -67,7 +67,7 @@ class DateTimePicker(DateTimeInput):
         self.div_attrs = div_attrs and div_attrs.copy() or {}
         self.icon_attrs = icon_attrs and icon_attrs.copy() or {}
         self.picker_id = self.div_attrs.get('id') or None
-        if options == False:  # datetimepicker will not be initalized when options is False
+        if options is False:  # datetimepicker will not be initalized when options is False
             self.options = False
         else:
             self.options = options and options.copy() or {}
@@ -77,14 +77,15 @@ class DateTimePicker(DateTimeInput):
     def render(self, name, value, attrs=None):
         if value is None:
             value = ''
-        input_attrs = self.build_attrs(attrs, extra_attrs={'type'=self.input_type, 'name'=name})
+        input_attrs = self.build_attrs(
+            attrs, extra_attrs={'type': self.input_type, 'name': name})
         if value != '':
             # Only add the 'value' attribute if a value is non-empty.
             input_attrs['value'] = force_text(self._format_value(value))
         input_attrs = {key: conditional_escape(val) for key, val in input_attrs.items()}
         if not self.picker_id:
-             self.picker_id = (input_attrs.get('id', '') +
-                               '_pickers').replace(' ', '_')
+            self.picker_id = (input_attrs.get('id', '') +
+                              '_pickers').replace(' ', '_')
         self.div_attrs['id'] = self.picker_id
         picker_id = conditional_escape(self.picker_id)
         div_attrs = {key: conditional_escape(val) for key, val in self.div_attrs.items()}
