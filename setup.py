@@ -1,5 +1,9 @@
+#!/usr/bin/env python
+
 import sys
 from setuptools import setup
+
+# ./setup.py sdist upload
 
 long_description = ''
 if 'upload' in sys.argv or 'register' in sys.argv:
